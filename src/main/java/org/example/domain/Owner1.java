@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.CascadeType;
+import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
@@ -21,7 +23,7 @@ public class Owner1 {
     private UUID id;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumns({
+    @JoinColumns(foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT), value = {
 	    @JoinColumn(insertable = false, updatable = false, name = "owner_id", referencedColumnName = "id"),
     })
     @Where(clause = "owner_type = 1")

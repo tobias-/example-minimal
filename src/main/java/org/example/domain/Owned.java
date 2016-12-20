@@ -3,8 +3,10 @@ package org.example.domain;
 import java.util.UUID;
 
 import javax.persistence.Column;
+import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
@@ -22,14 +24,14 @@ public class Owned {
     private int ownerType;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumns({
+    @JoinColumns(foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT), value = {
 	    @JoinColumn(insertable = false, updatable = false, name = "owner_id", referencedColumnName = "id"),
     })
     @Where(clause = "owner_type = 1")
     private Owner1 owner1;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumns({
+    @JoinColumns(foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT), value = {
 	    @JoinColumn(insertable = false, updatable = false, name = "owner_id", referencedColumnName = "id"),
     })
     @Where(clause = "owner_type = 2")
