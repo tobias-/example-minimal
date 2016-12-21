@@ -47,7 +47,9 @@ public class OwnerTest {
 	Owner1 refereshedOwner1 = server.find(Owner1.class, owner1.getId());
 	assertFalse(refereshedOwner1.getOwneds().isEmpty());
 	assertEquals(1, refereshedOwner1.getOwneds().size());
-	Owned refreshedOwned1 = refereshedOwner1.getOwneds().get(0);
+	System.err.println("Foo");
+	System.out.println("foo");
+	Owned refreshedOwned1 = server.find(Owned.class).fetch("owner1").fetch("owner2").where().idEq(owned1.getId()).findUnique();
 	assertEquals(owned1.getId(), refreshedOwned1.getId());
 	assertNotNull(refreshedOwned1.getOwner1());
 	assertEquals(owner1.getId(), refreshedOwned1.getOwner1().getId());

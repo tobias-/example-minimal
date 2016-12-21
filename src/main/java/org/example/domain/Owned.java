@@ -5,14 +5,11 @@ import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
-
-import io.ebean.annotation.Where;
 
 @Entity
 public class Owned {
@@ -23,18 +20,18 @@ public class Owned {
     @Column(name = "owner_type")
     private int ownerType;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumns(foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT), value = {
-	    @JoinColumn(insertable = false, updatable = false, name = "owner_id", referencedColumnName = "id"),
+	    @JoinColumn(insertable = false, updatable = false, name = "owner_id", referencedColumnName = "id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT)),
+	    @JoinColumn(insertable = false, updatable = false, name = "owner_type", referencedColumnName = "1"),
     })
-    @Where(clause = "owner_type = 1")
     private Owner1 owner1;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumns(foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT), value = {
-	    @JoinColumn(insertable = false, updatable = false, name = "owner_id", referencedColumnName = "id"),
+	    @JoinColumn(insertable = false, updatable = false, name = "owner_id", referencedColumnName = "id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT)),
+	    @JoinColumn(insertable = false, updatable = false, name = "owner_type", referencedColumnName = "2"),
     })
-    @Where(clause = "owner_type = 2")
     private Owner2 owner2;
 
     public Owned() {}
