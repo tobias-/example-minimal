@@ -21,6 +21,7 @@ import io.ebean.annotation.Where;
 public class Owner1 {
     @Id
     private UUID id;
+    private String text;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumns(foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT), value = {
@@ -46,5 +47,13 @@ public class Owner1 {
 
     public void setId(final UUID id) {
 	this.id = id;
+    }
+
+    public String getText() {
+	return text;
+    }
+
+    public void setText(final String text) {
+	this.text = text;
     }
 }
